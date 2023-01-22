@@ -10,6 +10,7 @@ export const env = {
   revalidate_first_page: process.env.NEXT_PUBLIC_REVALIDATE_FIRST_PAGE !== 'false',
   origins: JSON.parse(process.env.ORIGINS || '[]') as string[],
   origins_regex: JSON.parse(process.env.ORIGINS_REGEX || '[]') as string[],
+  giscus_repo: process.env.GISCUS_REPO || 'giscus/giscus',
 } as const;
 
 export const availableThemes = [

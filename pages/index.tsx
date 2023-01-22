@@ -32,9 +32,9 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
 
   contents[1] = `${afterConfig}\n## ${t('tryItOut')} 👇👇👇\n`;
 
-  const token = await getAppAccessToken('giscus/giscus').catch(() => '');
+  const token = await getAppAccessToken(env.giscus_repo).catch(() => '');
   const [contentBefore, contentAfter] = await Promise.all(
-    contents.map((section) => renderMarkdown(section, token, 'giscus/giscus')),
+    contents.map((section) => renderMarkdown(section, token, env.giscus_repo)),
   );
 
   const comment: IComment = {
@@ -57,7 +57,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     replies: [],
     replyCount: 0,
     upvoteCount: 0,
-    url: 'https://github.com/giscus/giscus',
+    url: `https://github.com/${env.giscus_repo}`,
     viewerDidAuthor: false,
     viewerHasUpvoted: false,
     viewerCanUpvote: false,
@@ -144,7 +144,7 @@ export default function Home({
         <div id="comments" className="giscus w-full my-8" />
         <Script
           src="/client.js"
-          data-repo="giscus/giscus"
+          data-repo={env.giscus_repo}
           data-repo-id="MDEwOlJlcG9zaXRvcnkzNTE5NTgwNTM="
           data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyNzk2NTc1"
           data-mapping="specific"

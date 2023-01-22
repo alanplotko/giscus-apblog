@@ -44,3 +44,6 @@ public/themes/
 
 # CSS variables purging script (for development)
 styles/themes/reference.css
+
+# VSCode Config
+.vscode/

@@ -5,11 +5,12 @@ import Widget from '../components/Widget';
 import { assertOrigin } from '../lib/config';
 import { ConfigContext, ThemeContext } from '../lib/context';
 import { decodeState } from '../lib/oauth/state';
-import { InputPosition, ISetConfigMessage } from '../lib/types/giscus';
+import { InputPosition, IRepoConfig, ISetConfigMessage } from '../lib/types/giscus';
 import { cleanSessionParam, getOriginHost } from '../lib/utils';
 import { env, Theme } from '../lib/variables';
 import { getAppAccessToken } from '../services/github/getAppAccessToken';
-import { getRepoConfig } from '../services/github/getConfig';
+// import { getRepoConfig } from '../services/github/getConfig';
+import { repoConfig } from '../giscus';
 import { availableLanguages } from '../lib/i18n';
 import Router from 'next/router';
 
@@ -34,8 +35,6 @@ export async function getServerSideProps({ query, res }: GetServerSidePropsConte
   const token = await decodeState(session, encryption_password)
     .catch(() => getAppAccessToken(repo))
     .catch(() => '');
-
-  const repoConfig = await getRepoConfig(repo, token);
 
   if (!assertOrigin(originHost, repoConfig)) {
     res.setHeader('Content-Security-Policy', `frame-ancestors 'self';`);
