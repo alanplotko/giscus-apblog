@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext, ConfigContext } from '../lib/context';
+import { env } from '../lib/variables';
 import { Trans, useGiscusTranslation } from '../lib/i18n';
 import { emitData } from '../lib/messages';
 import { CommentOrder, IMetadataMessage } from '../lib/types/giscus';
@@ -72,7 +73,8 @@ export default function Giscus({ onDiscussionCreateRequest, onError }: IGiscusPr
   );
 
   const shouldCreateDiscussion = data.isNotFound && !number;
-  const shouldShowBranding = !!data.discussion.url;
+  const shouldShowLinkBack = env.comments_show_linkback;
+  const shouldShowBranding = env.show_branding || !!data.discussion.url;
 
   const shouldShowReplyCount =
     !data.error && !data.isNotFound && !data.isLoading && data.totalReplyCount > 0;
@@ -127,7 +129,7 @@ export default function Giscus({ onDiscussionCreateRequest, onError }: IGiscusPr
                 t('comments', { count: 0 })
               ) : data.error && !data.backData ? (
                 t('genericError', { message: data.error?.message || '' })
-              ) : (
+              ) : shouldShowLinkBack ? (
                 <a
                   href={data.discussion.url}
                   target="_blank"
@@ -136,6 +138,8 @@ export default function Giscus({ onDiscussionCreateRequest, onError }: IGiscusPr
                 >
                   {t('comments', { count: data.totalCommentCount })}
                 </a>
+              ) : (
+                <span>{t('comments', { count: data.totalCommentCount })}</span>
               )}
             </h4>
             {shouldShowReplyCount ? (
@@ -194,24 +198,24 @@ export default function Giscus({ onDiscussionCreateRequest, onError }: IGiscusPr
         <div className="gsc-timeline">
           {!data.isLoading
             ? data.frontComments.map((comment) => (
-                <Comment
-                  key={comment.id}
-                  comment={comment}
-                  replyBox={
-                    token && !data.isLocked ? (
-                      <CommentBox
-                        discussionId={data.discussion.id}
-                        context={repo}
-                        onSubmit={frontMutators.addNewReply}
-                        replyToId={comment.id}
-                        viewer={data.viewer}
-                      />
-                    ) : undefined
-                  }
-                  onCommentUpdate={frontMutators.updateComment}
-                  onReplyUpdate={frontMutators.updateReply}
-                />
-              ))
+              <Comment
+                key={comment.id}
+                comment={comment}
+                replyBox={
+                  token && !data.isLocked ? (
+                    <CommentBox
+                      discussionId={data.discussion.id}
+                      context={repo}
+                      onSubmit={frontMutators.addNewReply}
+                      replyToId={comment.id}
+                      viewer={data.viewer}
+                    />
+                  ) : undefined
+                }
+                onCommentUpdate={frontMutators.updateComment}
+                onReplyUpdate={frontMutators.updateReply}
+              />
+            ))
             : null}
 
           {data.numHidden > 0 ? (
@@ -233,24 +237,24 @@ export default function Giscus({ onDiscussionCreateRequest, onError }: IGiscusPr
 
           {!data.isLoading
             ? data.backComments.map((comment) => (
-                <Comment
-                  key={comment.id}
-                  comment={comment}
-                  replyBox={
-                    token && !data.isLocked ? (
-                      <CommentBox
-                        discussionId={data.discussion.id}
-                        context={repo}
-                        onSubmit={backMutators.addNewReply}
-                        replyToId={comment.id}
-                        viewer={data.viewer}
-                      />
-                    ) : undefined
-                  }
-                  onCommentUpdate={backMutators.updateComment}
-                  onReplyUpdate={backMutators.updateReply}
-                />
-              ))
+              <Comment
+                key={comment.id}
+                comment={comment}
+                replyBox={
+                  token && !data.isLocked ? (
+                    <CommentBox
+                      discussionId={data.discussion.id}
+                      context={repo}
+                      onSubmit={backMutators.addNewReply}
+                      replyToId={comment.id}
+                      viewer={data.viewer}
+                    />
+                  ) : undefined
+                }
+                onCommentUpdate={backMutators.updateComment}
+                onReplyUpdate={backMutators.updateReply}
+              />
+            ))
             : null}
         </div>
 
