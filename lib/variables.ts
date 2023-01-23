@@ -12,7 +12,7 @@ export const env = {
   origins_regex: JSON.parse(process.env.ORIGINS_REGEX || '[]') as string[],
   comments_show_linkback: process.env.COMMENTS_SHOW_LINKBACK !== 'false',
   show_branding: process.env.SHOW_BRANDING !== 'false',
-  giscus_setup_complete: process.env.GISCUS_SETUP_COMPLETE !== 'true',
+  giscus_setup_complete: process.env.GISCUS_SETUP_COMPLETE === 'true',
 } as const;
 
 export const availableThemes = [
