@@ -10,9 +10,9 @@ export const env = {
   revalidate_first_page: process.env.NEXT_PUBLIC_REVALIDATE_FIRST_PAGE !== 'false',
   origins: JSON.parse(process.env.ORIGINS || '[]') as string[],
   origins_regex: JSON.parse(process.env.ORIGINS_REGEX || '[]') as string[],
-  giscus_repo: process.env.GISCUS_REPO || 'giscus/giscus',
   comments_show_linkback: process.env.COMMENTS_SHOW_LINKBACK !== 'false',
   show_branding: process.env.SHOW_BRANDING !== 'false',
+  giscus_setup_complete: process.env.GISCUS_SETUP_COMPLETE !== 'false',
 } as const;
 
 export const availableThemes = [
