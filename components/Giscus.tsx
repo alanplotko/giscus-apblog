@@ -139,7 +139,7 @@ export default function Giscus({ onDiscussionCreateRequest, onError }: IGiscusPr
                   {t('comments', { count: data.totalCommentCount })}
                 </a>
               ) : (
-                <span>{t('comments', { count: data.totalCommentCount })}</span>
+                <>{t('comments', { count: data.totalCommentCount })}</>
               )}
             </h4>
             {shouldShowReplyCount ? (
@@ -198,24 +198,24 @@ export default function Giscus({ onDiscussionCreateRequest, onError }: IGiscusPr
         <div className="gsc-timeline">
           {!data.isLoading
             ? data.frontComments.map((comment) => (
-              <Comment
-                key={comment.id}
-                comment={comment}
-                replyBox={
-                  token && !data.isLocked ? (
-                    <CommentBox
-                      discussionId={data.discussion.id}
-                      context={repo}
-                      onSubmit={frontMutators.addNewReply}
-                      replyToId={comment.id}
-                      viewer={data.viewer}
-                    />
-                  ) : undefined
-                }
-                onCommentUpdate={frontMutators.updateComment}
-                onReplyUpdate={frontMutators.updateReply}
-              />
-            ))
+                <Comment
+                  key={comment.id}
+                  comment={comment}
+                  replyBox={
+                    token && !data.isLocked ? (
+                      <CommentBox
+                        discussionId={data.discussion.id}
+                        context={repo}
+                        onSubmit={frontMutators.addNewReply}
+                        replyToId={comment.id}
+                        viewer={data.viewer}
+                      />
+                    ) : undefined
+                  }
+                  onCommentUpdate={frontMutators.updateComment}
+                  onReplyUpdate={frontMutators.updateReply}
+                />
+              ))
             : null}
 
           {data.numHidden > 0 ? (
@@ -237,24 +237,24 @@ export default function Giscus({ onDiscussionCreateRequest, onError }: IGiscusPr
 
           {!data.isLoading
             ? data.backComments.map((comment) => (
-              <Comment
-                key={comment.id}
-                comment={comment}
-                replyBox={
-                  token && !data.isLocked ? (
-                    <CommentBox
-                      discussionId={data.discussion.id}
-                      context={repo}
-                      onSubmit={backMutators.addNewReply}
-                      replyToId={comment.id}
-                      viewer={data.viewer}
-                    />
-                  ) : undefined
-                }
-                onCommentUpdate={backMutators.updateComment}
-                onReplyUpdate={backMutators.updateReply}
-              />
-            ))
+                <Comment
+                  key={comment.id}
+                  comment={comment}
+                  replyBox={
+                    token && !data.isLocked ? (
+                      <CommentBox
+                        discussionId={data.discussion.id}
+                        context={repo}
+                        onSubmit={backMutators.addNewReply}
+                        replyToId={comment.id}
+                        viewer={data.viewer}
+                      />
+                    ) : undefined
+                  }
+                  onCommentUpdate={backMutators.updateComment}
+                  onReplyUpdate={backMutators.updateReply}
+                />
+              ))
             : null}
         </div>
 
