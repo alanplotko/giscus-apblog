@@ -14,6 +14,7 @@
     "mscript": "google-closure-compiler < public/client.js --js_output_file public/client.js",
     "dev": "yarn cscript --watch --preserveWatchOutput & yarn cthemes --watch & next dev -p 6000",
     "build": "yarn cscript && yarn cthemes && yarn mscript && next build",
+    "build-docker": "yarn cscript && yarn cthemes && next build",
     "start": "next start",
     "lint": "stylelint **/*.css && eslint . --cache --max-warnings 0",
     "lint:fix": "stylelint --fix **/*.css && eslint --fix . --cache --max-warnings 0",
