@@ -29,8 +29,8 @@ COPY --from=builder /app/package.json ./package.json
 
 USER nextjs
 
-EXPOSE 6000
+EXPOSE 3500
 
-ENV PORT 6000
+ENV PORT 3500
 
 CMD ["yarn", "start"]
