@@ -31,7 +31,7 @@ export async function getServerSideProps({ query, res }: GetServerSidePropsConte
   const backLink = (query.backLink as string) || origin;
 
   const { encryption_password } = env;
-  const token = await decodeState(session, encryption_password)
+  await decodeState(session, encryption_password)
     .catch(() => getAppAccessToken(repo))
     .catch(() => '');
 
