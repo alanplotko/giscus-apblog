@@ -58,6 +58,10 @@ const config = withBundleAnalyzer(
                 key: 'Cache-Control',
                 value: `public, max-age=0, stale-while-revalidate=${swr}`,
               },
+              {
+                key: 'Access-Control-Allow-Origin',
+                value: JSON.parse(process.env.ORIGINS || '[]')[0],
+              },
             ],
           },
         ];
