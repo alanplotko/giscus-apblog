@@ -16,8 +16,18 @@ export const GITHUB_REPO_INSTALLATION_URL = (repoWithOwner: string) =>
 export const GITHUB_ACCESS_TOKEN_URL = (id: number) =>
   `${GITHUB_INSTALLATIONS_URL}/${id}/access_tokens`;
 
-// Supabase
+// Config for caching installation access tokens
+export const CACHE_INSTALLATION_ACCESS_TOKENS =
+  process.env.CACHE_INSTALLATION_ACCESS_TOKENS === 'true';
+export const CACHE_TYPE = process.env.CACHE_TYPE || 'supabase';
 
+// Bit.io
+export const CACHE_BIT_IO_KEY = process.env.CACHE_BIT_IO_KEY;
+export const CACHE_BIT_IO_URL = process.env.CACHE_BIT_IO_URL;
+export const CACHE_BIT_IO_DATABASE = process.env.CACHE_BIT_IO_DATABASE;
+export const CACHE_BIT_IO_TABLE = process.env.CACHE_BIT_IO_TABLE || 'installation_access_tokens';
+
+// Supabase
 export const SUPABASE_KEY = process.env.SUPABASE_KEY;
 
 const SUPABASE_URL = process.env.SUPABASE_URL;

@@ -12,9 +12,9 @@ export const env = {
   revalidate_first_page: process.env.NEXT_PUBLIC_REVALIDATE_FIRST_PAGE !== 'false',
   origins: JSON.parse(process.env.ORIGINS || '[]') as string[],
   origins_regex: JSON.parse(process.env.ORIGINS_REGEX || '[]') as string[],
-  comments_show_linkback: process.env.COMMENTS_SHOW_LINKBACK !== 'false',
-  show_branding: process.env.SHOW_BRANDING !== 'false',
-  giscus_setup_complete: process.env.GISCUS_SETUP_COMPLETE === 'true',
+  comments_show_linkback: process.env.NEXT_PUBLIC_COMMENTS_SHOW_LINKBACK !== 'false',
+  show_branding: process.env.NEXT_PUBLIC_SHOW_BRANDING !== 'false',
+  giscus_setup_complete: process.env.NEXT_PUBLIC_GISCUS_SETUP_COMPLETE === 'true',
 } as const;
 
 export const availableThemes = [

@@ -73,8 +73,8 @@ export default function Giscus({ onDiscussionCreateRequest, onError }: IGiscusPr
   );
 
   const shouldCreateDiscussion = data.isNotFound && !number;
-  const shouldShowLinkBack = env.comments_show_linkback;
   const shouldShowBranding = env.show_branding && !!data.discussion.url;
+  const shouldShowLinkBack = env.comments_show_linkback;
 
   const shouldShowReplyCount =
     !data.error && !data.isNotFound && !data.isLoading && data.totalReplyCount > 0;
